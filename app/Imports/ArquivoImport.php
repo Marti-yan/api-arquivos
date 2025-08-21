@@ -16,7 +16,7 @@ use App\Models\Arquivo;
 
 HeadingRowFormatter::default('none'); // manter o formato  q vem do arquivo
 
-class ArquivoImport implements ToModel, WithHeadingRow, WithChunkReading //, ShouldQueue
+class ArquivoImport implements ToModel, WithHeadingRow, WithChunkReading 
 {
     protected $arquivoId;
 
