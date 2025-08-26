@@ -11,6 +11,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ArquivoController extends Controller
 {
+
     public function import(Request $request)
     {
 
@@ -34,18 +35,11 @@ class ArquivoController extends Controller
             ], 422);
         }
 
+
         try {
 
-            // dump($request->file('file')); // Verifica se o arquivo foi enviado corretamente
 
-            // altera o nome do arquivo para a data e hora em que foi importado
-            $fileName = 'import-' . now()->format('d-m-Y H;i') . '.csv';
-
-            // Armazena o arquivo na pasta 'imports' dentro de 'storage/app'
-            $path = $request->file('file')->storeAs('imports', $fileName);
-            //dump($path); // Verifica o caminho onde o arquivo foi salvo
-
-// faz o registro de identificação do arquivo na tabela Arquivo
+            // faz o registro de identificação do arquivo na tabela Arquivo
             $registroArquivo = Arquivo::create([
                 'file_hash' => $hash,
                 'file_name' => $nomeoriginal
@@ -75,4 +69,5 @@ class ArquivoController extends Controller
             ], 500);
         }
     }
+
 }

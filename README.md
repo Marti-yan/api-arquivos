@@ -1,61 +1,76 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Yan Martins Lourenço Fraga
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+pesquisas na API:
+a intenção a principio seria, dar um GET direto e retornar todos os arquivos e suas linhas, e caso pesquisassem o arquivo especifico (id, nome ou data) retornaria ele e seus dados, e se pesquisassem um dado especifico retornaria o do ultimo arquivo, mas acredito que pra manter algo mais organizado e intuitivo, principalmente pra entregar com o front se fosse o caso, optei por deixar tudo em rotas diferentes.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+<h1> Yan Martins Lourenço Fraga</h1> 
+<p>yan@martinscoders.com</p>
+<h3>Deselvolvedor fullStack Jr.</h3>
+<hr>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<h4>Metodologia de desenvolvimento aplicada: 'Scrum'</h4>
+<p>Técnica basiada em Scrum, mas voltada para implementação individual.</p>
+<hr>
+<br>
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+<b>$-VISÃO DO PROJETO</b>
+<h1>O Desafio</h1>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+<p> A API precisa ter no mínimo 3 endpoints, com as seguintes funcionalidades: </p>
+<ul>
+    <li>Upload de arquivo</li>
+    <li>Histórico de upload de arquivo</li>
+    <li>Buscar conteúdo do arquivo</li>
+</ul>
 
-## Laravel Sponsors
+<h3>As Regras de négocio:</h3>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+<ul>
+    <li> 
+        <b>Upload de Arquivo:</b>
+        <ol>-Deve ser possível enviar arquivos no formato Excel e CSV</ol>
+        <ol>-Não é permitido enviar o mesmo arquivo 2x</ol>
+    </li>
+    <li> 
+        <b>Histórico de upload de arquivo:</b>
+        <ol>-Deve ser possível buscar um envio especifico por nome do arquivo ou data referência</ol>
+    </li>
+    <li> 
+        <b>Buscar conteúdo do arquivo:</b>
+        <ol>-Neste endpoint é opcional o envio de parâmetros mas deve ser possível enviar no mínimo 2 informações para busca, que seriam os campos <b>"TckrSymb" e "RptDt"</b>.</ol>
+        <ol>-Se não enviar nenhum parâmetro o resultado deve ser apresentado páginado.</ol>
+        <ol>
+        -O retorno esperado deve conter no mínimo essas informações: <br>
+            {                                                       <br>
+                 "RptDt": "2024-08-22",                             <br>
+                "TckrSymb": "AMZO34",                               <br>
+                "MktNm": "EQUITY-CASH",                             <br>
+                "SctyCtgyNm": "BDR",                                <br>
+                "ISIN": "BRAMZOBDR002",                             <br>
+                "CrpnNm": "AMAZON.COM, INC"                         <br>
+            }                             
+        </ol>
+    </li>
+</ul>
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<hr>
+<br>
+<b>$-BACKLOG</b>
+<h3>Solução:</h3>
+<h5>"Quebrar o problema em problemas menores."</h5>
+<h4>1° problema: montar a API</h4>
+<ol> 
+    <li>
+        <b>PLANEJAMENTO</b> 
+        <ul>
+            <li>Recursos da API: quais entidades você vai expor (users, products, orders, etc.)</li>
+            <li>Endpoints: quais rotas a API terá (GET /users, POST /products)</li>
+            <li>Autenticação e autorização: JWT, Sanctum ou Passport</li>
+            <li>Formato de resposta: JSON padronizado com status, message, data</li>
+        </ul>
+    </li>
+</ol>

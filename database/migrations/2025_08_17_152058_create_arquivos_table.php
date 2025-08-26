@@ -12,14 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('arquivos', function (Blueprint $table) {
-            // $table->id();
-            $table->string('TckrSymb')->nullable();
-            $table->string('RptDt')->nullable();
-            $table->string('MktNm')->nullable();
-            $table->string('SctyCtgyNm')->nullable();
-            $table->string('ISIN')->nullable();
-            $table->string('CrpnNm')->nullable();
-            // $table->timestamps();
+            $table->id();
+            $table->string('file_name'); // Armazena o nome original do arquivo
+            $table->string('file_hash'); // Armazena o hash do arquivo para evitar duplicatas
+            $table->timestamps();
         });
     }
 

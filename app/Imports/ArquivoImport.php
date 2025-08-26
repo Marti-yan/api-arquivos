@@ -8,11 +8,9 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Imports\HeadingRowFormatter;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Models\LinhaArquivo;
 
 use Illuminate\Support\Facades\Log;
-
-use App\Models\Arquivo;
 
 HeadingRowFormatter::default('none'); // manter o formato  q vem do arquivo
 
@@ -27,20 +25,20 @@ class ArquivoImport implements ToModel, WithHeadingRow, WithChunkReading
 
     public function model(array $row)
     {
-        $arquivo = Arquivo::find($this->arquivoId);
         $row = array_change_key_case($row, CASE_LOWER);
-        Log::info('Linha importada', $row);
-        return new Arquivo([
+        // Log::info('Linha importada', $row); // verificação de teste, verifica se todas as linhas estão chegando corretamente;
+        return new LinhaArquivo([
+            'arquivo_id' => $this->arquivoId,
             'rptdt'      => $row['rptdt'] ?? null,
             'tckrsymb'   => $row['tckrsymb'] ?? null,
             'mktnm'      => $row['mktnm'] ?? null,
             'sctyctgynm' => $row['sctyctgynm'] ?? null,
             'isin'       => $row['isin'] ?? null,
-            'crpnnm'     => $row['crpnnm'] ?? null,
-            'file_hash'  => $arquivo->file_hash ?? null,
-            'file_name'  => $arquivo->file_name ?? null
+            'crpnnm'     => $row['crpnnm'] ?? null
         ]);
     }
+
+
 
     public function chunkSize(): int
     {
