@@ -59,4 +59,8 @@ class ArquivoReadController extends Controller
             ], 500);
         }
     }
+
+
+
+    
 }
