@@ -23,7 +23,7 @@ class ArquivoReadController extends Controller
     public function index(Request $request)
     {
         $arquivos = Arquivo::with('linhas')->get();
-        return response()->json($arquivos);
+        return response()->json($arquivos);  // retorna todos os arquivos
     }
 
     public function pesquisa(Request $request)
@@ -44,14 +44,14 @@ class ArquivoReadController extends Controller
 
             $arquivos = $query->get();
 
-            if ($arquivos->isEmpty()) {
+            if ($arquivos->isEmpty()) { 
                 return response()->json([
                     'status' => 'vazio',
                     'message' => 'Nenhum arquivo encontrado'
                 ], 404);
             }
 
-            return response()->json($arquivos);
+            return response()->json($arquivos); // retorna os arquivos filtrados
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',

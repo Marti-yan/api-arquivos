@@ -38,8 +38,6 @@ class ArquivoImport implements ToModel, WithHeadingRow, WithChunkReading
         ]);
     }
 
-
-
     public function chunkSize(): int
     {
         return 1000; // carregar em lotes de 1000 linhas por vez

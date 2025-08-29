@@ -29,12 +29,22 @@ class LinhaArquivoController extends Controller
         // Pega apenas os campos enviados que estão na lista de permitidos
         $filtros = array_map('mb_strtolower', $request->only($camposPermitidos)); // pega apenas os campos permitidos pra buscar e passa tudo pra minusculo pra previnir erros
 
-
+        //  Se não tiver filtro, retorna paginado
         if (empty($filtros)) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Nenhum parâmetro de busca foi fornecido.'
-            ], 400);
+
+            $arquivoId = $request->input('arquivo_id');
+
+            // Se não for especificado o arquivo, pega o último importado
+            if (!$arquivoId) {
+                $arquivoId = \App\Models\Arquivo::latest('id')->value('id');
+            }
+
+dd($arquivoId, \App\Models\LinhaArquivo::where('arquivo_id', $arquivoId)->count());
+
+
+            $linhas = \App\Models\LinhaArquivo::where('arquivo_id', $arquivoId)
+                ->paginate(20);
+            return response()->json($linhas);
         }
 
         // Se não for especificado o arquivo, pega o último importado

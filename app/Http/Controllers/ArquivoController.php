@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Imports\ArquivoImport;
-use App\Jobs\ImportCSVjob;
 use App\Models\Arquivo;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -24,8 +23,11 @@ class ArquivoController extends Controller
         ], [
             'file.required' => 'O arquivo é obrigatório.',
             'file.file' => 'O arquivo deve ser um arquivo válido.',
-            'file.mimes' => 'O arquivo deve ser do tipo: xlsx, xls, csv, xlsm, CSV, XLSX, XLS.' // deixei sem mostrar o .txt, pois não é um tipo de arquivo seguro, mas é necessário para o funcionamento do sistema.
-        ]); // não consegui implementar sem a extensão .txt, o mimetypes fica dando text/csv, e sem o text não leu, sei que não é uma feature segura porem é algo que voltarei a trabalhar.
+            'file.mimes' => 'O arquivo deve ser do tipo: xlsx, xls, csv, xlsm, CSV, XLSX, XLS.' 
+        ]);  
+            
+        // deixei sem mostrar o .txt, pois não é um tipo de arquivo seguro, mas é necessário para o funcionamento do sistema.
+         // não consegui implementar sem a extensão .txt, o mimetypes fica dando text/csv, e sem o text não leu, sei que não é uma feature segura porem é algo que voltarei a trabalhar.
 
         // Verificar se já tem algum outro arquivo com o mesmo hash
         if (Arquivo::where('file_hash', $hash)->exists()) {
@@ -45,8 +47,7 @@ class ArquivoController extends Controller
                 'file_name' => $nomeoriginal
             ]);
 
-
-            // Envia o arquivo para ser importado em segundo plano
+            // Envia o arquivo para ser importado
             Excel::import(
                 new ArquivoImport($registroArquivo->id),
                 $request->file('file'),
@@ -55,10 +56,9 @@ class ArquivoController extends Controller
                 ['delimiter' => ';']
             );
 
-
-
+            // Retorna sucesso em JSON
             return response()->json([
-                'message' => 'Sucesso, o arquivo esta sendo importado em segundo plano.',
+                'message' => 'Sucesso, o arquivo foi importado.',
                 'arquivo_id' => $registroArquivo->id
             ]);
         } catch (\Exception $e) {
@@ -67,6 +67,7 @@ class ArquivoController extends Controller
                 'status' => 'error',
                 'message' => $e->getMessage()
             ], 500);
+            
         }
     }
 

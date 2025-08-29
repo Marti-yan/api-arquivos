@@ -62,15 +62,67 @@ a intenção a principio seria, dar um GET direto e retornar todos os arquivos e
 <b>$-BACKLOG</b>
 <h3>Solução:</h3>
 <h5>"Quebrar o problema em problemas menores."</h5>
-<h4>1° problema: montar a API</h4>
+<h4> problema: montar a API</h4>
 <ol> 
     <li>
         <b>PLANEJAMENTO</b> 
         <ul>
-            <li>Recursos da API: quais entidades você vai expor (users, products, orders, etc.)</li>
-            <li>Endpoints: quais rotas a API terá (GET /users, POST /products)</li>
-            <li>Autenticação e autorização: JWT, Sanctum ou Passport</li>
-            <li>Formato de resposta: JSON padronizado com status, message, data</li>
+            <li>Recursos da API: quais entidades você vai expor (arquivos, linhas dos arquivos, e pesquisa de dados/linhas).</li>
+            <li>
+                <b># Endpoints</b><br>    
+                -Upload de arquivo;<br>
+                -Historico de upload de arquivo;<br>
+                -buscar conteúdo do arquivo;<br>
+            </li>
+            <li>
+                <b># Validações</b><br>
+                -validação do tipo de arquivo de entrada;<br>
+                -verificação de arquivo duplicado;<br>
+                -importar apenas linhas especificas;<br>
+                -filtros de pesquisas (arquivo/linha);<br>
+            </li>
+            <li>Formato de resposta: tratamento com middleware pra sempre retornar JSON, JSON tratados pra paginar e mostrar amigavelmente possiveis erros</li>
+        </ul>
+    </li>
+    <li>
+        <b>UPLOAD do arquivo</b>
+        <ul>
+            <li>
+            <p>implementação inicial, so API, download do arquivo em 1° plano.</p>
+            <p>implementação futura, interface visual, download do arquivo em 2° plano. </p>
+            </li>
+            <li>
+              <b> # Requisição do arquivo, via POST</b><br>
+                -Receber o arquivo;<br>
+                -Salvar o nome original do arquivo;<br>
+                -Criar um Hash do arquivo com md5;<br>
+                -validar o tipo do arquivo;<br>
+                -verificar se o arquivo não esta duplicado;<br>
+            </li>
+            <li>
+            <b># IMPORT</b><br>
+                - importar o arquivo pro banco de dados (maatwebsite);<br>
+                - fillable com colunas especificas do arquivo;<br>
+                - retonar JSON com resposta (sucesso ou erro);<br>
+                - 
+            </li>
+            <li>
+                <b># Historico de upload</b><br>
+                - Criar uma data do upload do arquivo no BD;<br>
+                - Listar os arquivos, principalmente por data;<br>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <b> BUSCAS </b><br>
+        <ul>
+            <b># metodos de buscar</b>
+            <li>
+                - Opção de retorno com ou sem o envio de paramentros; <br>
+                - Se não tiver nenhum parametro, retornar paginado; <br>
+                - Retorno esperado, minimo: (colunas principais); <br>
+            </li>
         </ul>
     </li>
 </ol>
+

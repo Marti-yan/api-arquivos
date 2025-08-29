@@ -5,6 +5,12 @@
 
     RewriteEngine On
 
+upload_max_filesize = 816M
+post_max_size = 816M
+max_execution_time = 600
+max_input_time = 600
+memory_limit = 1024M
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
