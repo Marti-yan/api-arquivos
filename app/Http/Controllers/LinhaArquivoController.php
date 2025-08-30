@@ -29,7 +29,7 @@ class LinhaArquivoController extends Controller
         // Pega apenas os campos enviados que estão na lista de permitidos
         $filtros = array_map('mb_strtolower', $request->only($camposPermitidos)); // pega apenas os campos permitidos pra buscar e passa tudo pra minusculo pra previnir erros
 
-        //  Se não tiver filtro, retorna paginado
+        //  Se não tiver filtro, retorna o ultimo arquivo, paginado
         if (empty($filtros)) {
 
             $arquivoId = $request->input('arquivo_id');
@@ -38,9 +38,6 @@ class LinhaArquivoController extends Controller
             if (!$arquivoId) {
                 $arquivoId = \App\Models\Arquivo::latest('id')->value('id');
             }
-
-dd($arquivoId, \App\Models\LinhaArquivo::where('arquivo_id', $arquivoId)->count());
-
 
             $linhas = \App\Models\LinhaArquivo::where('arquivo_id', $arquivoId)
                 ->paginate(20);
@@ -57,8 +54,8 @@ dd($arquivoId, \App\Models\LinhaArquivo::where('arquivo_id', $arquivoId)->count(
         // Monta a query
         $query = \App\Models\LinhaArquivo::where('arquivo_id', $arquivoId);
 
-        foreach ($filtros as $campo => $valor) {
-            $query->whereRaw("LOWER($campo) LIKE ?", ["%{$valor}%"]);
+        foreach ($filtros as $campo => $valor) { // percorre os filtros e monta a query
+            $query->whereRaw("LOWER($campo) LIKE ?", ["%{$valor}%"]); // busca sem case sensitive
         }
 
         // Retorna todas as colunas da(s) linha(s) encontrada(s)
@@ -71,7 +68,7 @@ dd($arquivoId, \App\Models\LinhaArquivo::where('arquivo_id', $arquivoId)->count(
             ]);
         }
 
-        // 🔹 Se a busca foi por campo, oculta `id` e `arquivo_id`
+        // Se a busca foi por campo, oculta `id` e `arquivo_id`
         if (!empty($filtros) && !$usouArquivoId) {
             $resultados->makeHidden(['id', 'arquivo_id']);
         }

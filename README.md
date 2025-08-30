@@ -1,10 +1,3 @@
-Yan Martins Lourenço Fraga
-
-
-
-
-pesquisas na API:
-a intenção a principio seria, dar um GET direto e retornar todos os arquivos e suas linhas, e caso pesquisassem o arquivo especifico (id, nome ou data) retornaria ele e seus dados, e se pesquisassem um dado especifico retornaria o do ultimo arquivo, mas acredito que pra manter algo mais organizado e intuitivo, principalmente pra entregar com o front se fosse o caso, optei por deixar tudo em rotas diferentes.
 
 
 <h1> Yan Martins Lourenço Fraga</h1> 
@@ -88,8 +81,8 @@ a intenção a principio seria, dar um GET direto e retornar todos os arquivos e
         <b>UPLOAD do arquivo</b>
         <ul>
             <li>
-            <p>implementação inicial, so API, download do arquivo em 1° plano.</p>
-            <p>implementação futura, interface visual, download do arquivo em 2° plano. </p>
+            <p>Pensando em uma futura aplicação com interface grafica, implementos o upload em 2° plano. </p>
+            <p>Para facilitar a aparecencia da aplicação, não ficando presa processando o arquivo, e retornando rapidamente uma mensagem, enquanto a API termina de importar.</p>
             </li>
             <li>
               <b> # Requisição do arquivo, via POST</b><br>
